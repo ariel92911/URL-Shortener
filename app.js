@@ -5,9 +5,15 @@ const exphbs = require('express-handlebars')
 const app = express()
 const port = 3000
 
+const bodyParser = require('body-parser')
+const generateTinyURL = require('./generate_tinyURL')
+
 // setting template engine
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
+
+// setting body-parser
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // setting routes
 app.get('/', (req, res) => {
@@ -15,8 +21,9 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-  console.log('get form POST request')
-  res.render('index')
+  const originalURL = req.body
+  const tinyURL = generateTinyURL()
+  res.render('index', { tinyURL, originalURL })
 })
 
 // starts the express server and listening for connections.

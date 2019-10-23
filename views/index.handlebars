@@ -11,8 +11,16 @@
 
             <div class="form-group form-row my-5">
               <label for="url-shortener">Enter a URL</label>
-              <input type="url" name="url" class="form-control mt-2" id="url-shortener">
+              <input type="url" name="url" class="form-control mt-2" id="url-shortener" required
+                value={{originalURL.url}}>
             </div>
+
+            {{#if tinyURL}}
+            <div class="alert alert-success" role="alert">
+              Link shortening successful ! Visit your website at <a href={{originalURL.url}}
+                class="alert-link">localhost:3000/{{tinyURL}}</a>
+            </div>
+            {{/if}}
 
             <div class="text-center">
               <button class="btn btn-outline-primary px-5" type="submit">Shorten!</button>
