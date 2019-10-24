@@ -11,14 +11,18 @@
 
             <div class="form-group form-row my-5">
               <label for="url-shortener">Enter a URL</label>
-              <input type="url" name="url" class="form-control mt-2" id="url-shortener" required
-                value={{originalURL.url}}>
+              <input type="url" name="url" class="form-control mt-2" id="url-shortener" required value={{url.link}}>
             </div>
 
-            {{#if tinyURL}}
+            {{#if url}}
             <div class="alert alert-success" role="alert">
-              Link shortening successful ! Visit your website at <a href={{originalURL.url}}
-                class="alert-link">localhost:3000/{{tinyURL}}</a>
+              Link shortening successful ! Visit your website at <a href={{url.link}}
+                class="alert-link">localhost:3000/{{url.shortenLink}}</a>
+            </div>
+            {{/if}}
+            {{#if invalidUrl}}
+            <div class="alert alert-danger" role="alert">
+              輸入短網無效！
             </div>
             {{/if}}
 

@@ -39,9 +39,36 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-  const originalURL = req.body
-  const tinyURL = generateTinyURL()
-  res.render('index', { tinyURL, originalURL })
+  const link = req.body.url
+  Url.findOne({ link: link }).then(url => {
+    if (url) {
+      return res.render('index', { url })
+    } else {
+      const newUrl = new Url({
+        link: req.body.url,
+        shortenLink: generateTinyURL()
+      })
+      newUrl
+        .save()
+        .then(url => {
+          res.render('index', { url })
+        })
+        .catch(err => console.log(err))
+    }
+  })
+})
+
+app.get('/:id', (req, res) => {
+  Url.findOne({ shortenLink: req.params.id }, (err, url) => {
+    if (err) return console.error(err)
+    if (!url) {
+      let invalidUrl = true
+      console.log("無此網址")
+      return res.render('index', { invalidUrl })
+    } else {
+      res.redirect(`${url.link}`)
+    }
+  })
 })
 
 // starts the express server and listening for connections.
