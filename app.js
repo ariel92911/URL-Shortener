@@ -9,7 +9,7 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const generateTinyURL = require('./generate_tinyURL')
 
-mongoose.connect('mongodb://localhost/url', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/url', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 
 // mongoose 連線後透過 mongoose.connection 拿到 Connection 的物件
 const db = mongoose.connection
@@ -72,6 +72,6 @@ app.get('/:id', (req, res) => {
 })
 
 // starts the express server and listening for connections.
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
   console.log(`Express app listening on port ${port}.`)
 })
