@@ -36,7 +36,6 @@ http://localhost:3000
 
 
 ## Feature
-1) 首頁畫面上有一個表單，使用者可以在表單輸入原始網址，如 https://www.google.com；送出表單之後，畫面會回傳格式化後的短網址，如 localhost:3000/6y7UP
+1) 首頁畫面上有一個表單，使用者可以在表單輸入原始網址，如 https://www.google.com；送出表單之後，畫面會回傳格式化後的短網址，如 https://your-project-name.herokuapp.com/6y7UP
 
-2) 使用者可以使用 http://localhost:3000/6y7UP 連向原本的網站 https://www.google.com
-
+2) 在伺服器啟動期間，使用者可以在瀏覽器的網址列，輸入你提供的短網址（如 https://your-project-name.herokuapp.com/6y7UP），瀏覽器就會導向原本的網站（如 https://www.google.com）
